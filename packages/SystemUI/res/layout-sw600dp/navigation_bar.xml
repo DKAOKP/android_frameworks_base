@@ -17,18 +17,38 @@
 -->
 
 <!--  navigation bar for sw600dp (small tablets) -->
-<com.android.systemui.statusbar.phone.NavigationBarView
+<com.android.systemui.statusbar.NavigationBarView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:systemui="http://schemas.android.com/apk/res/com.android.systemui"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="#FF000000"
+    android:background="@drawable/nav_bar_bg"
     >
 
     <FrameLayout android:id="@+id/rot0"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         >
+
+        <RelativeLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <com.android.systemui.statusbar.policy.BatteryBarController
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:visibility="gone"
+                systemui:viewLocation="2"
+                android:layout_alignParentTop="true" />
+
+            <com.android.systemui.statusbar.policy.BatteryBarController
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:visibility="gone"
+                systemui:viewLocation="3"
+                android:layout_alignParentBottom="true" />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_height="match_parent"
@@ -171,6 +191,26 @@
         android:paddingTop="0dp"
         >
 
+        <RelativeLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <com.android.systemui.statusbar.policy.BatteryBarController
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:visibility="gone"
+                systemui:viewLocation="2"
+                android:layout_alignParentTop="true" />
+
+            <com.android.systemui.statusbar.policy.BatteryBarController
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:visibility="gone"
+                systemui:viewLocation="3"
+                android:layout_alignParentBottom="true" />
+
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent"
@@ -312,4 +352,4 @@
         android:visibility="gone"
         />
 
-</com.android.systemui.statusbar.phone.NavigationBarView>
+</com.android.systemui.statusbar.NavigationBarView>

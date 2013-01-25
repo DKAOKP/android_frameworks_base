@@ -22,7 +22,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.*;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
 import android.view.View;
@@ -43,7 +42,6 @@ public class CharacterPickerDialog extends Dialog
     private View mView;
     private Editable mText;
     private String mOptions;
-    private String[] mOptionsArray;
     private boolean mInsert;
     private LayoutInflater mInflater;
     private Button mCancelButton;
@@ -61,24 +59,6 @@ public class CharacterPickerDialog extends Dialog
         mView = view;
         mText = text;
         mOptions = options;
-        mInsert = insert;
-        mInflater = LayoutInflater.from(context);
-    }
-
-    /**
-     * Creates a new CharacterPickerDialog that presents the specified
-     * <code>options</code> for insertion or replacement (depending on
-     * the sense of <code>insert</code>) into <code>text</code>.
-     * @hide
-     */
-    public CharacterPickerDialog(Context context, View view,
-                                 Editable text, String[] options,
-                                 boolean insert) {
-        super(context, com.android.internal.R.style.Theme_Panel);
-
-        mView = view;
-        mText = text;
-        mOptionsArray = options;
         mInsert = insert;
         mInflater = LayoutInflater.from(context);
     }
@@ -142,27 +122,17 @@ public class CharacterPickerDialog extends Dialog
         public View getView(int position, View convertView, ViewGroup parent) {
             Button b = (Button)
                 mInflater.inflate(R.layout.character_picker_button, null);
-            if (mOptions != null) {
-                b.setText(String.valueOf(mOptions.charAt(position)));
-            } else {
-                b.setText(String.valueOf(mOptionsArray[position]));
-            }
+            b.setText(String.valueOf(mOptions.charAt(position)));
             b.setOnClickListener(CharacterPickerDialog.this);
             return b;
         }
 
         public final int getCount() {
-            return (mOptions != null) ? mOptions.length() : mOptionsArray.length;
+            return mOptions.length();
         }
 
         public final Object getItem(int position) {
-            Object item;
-            if (mOptions != null) {
-                item = String.valueOf(mOptions.charAt(position));
-            } else {
-                item = String.valueOf(mOptionsArray[position]);
-            }
-            return item;
+            return String.valueOf(mOptions.charAt(position));
         }
 
         public final long getItemId(int position) {

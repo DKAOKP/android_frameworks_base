@@ -470,7 +470,7 @@ public class TelephonyManager {
             }
         }
 
-         if (DBG) Log.d(TAG, "getLteOnCdmaMode=" + retVal + " curVal=" + curVal +
+        Log.d(TAG, "getLteOnCdmaMode=" + retVal + " curVal=" + curVal +
                 " product_type='" + productType +
                 "' lteOnCdmaProductType='" + sLteOnCdmaProductType + "'");
         return retVal;
@@ -533,6 +533,26 @@ public class TelephonyManager {
      */
     public String getNetworkCountryIso() {
         return SystemProperties.get(TelephonyProperties.PROPERTY_OPERATOR_ISO_COUNTRY);
+    }
+
+    /**
+     * @hide
+     */
+    public void toggle2G(boolean twoGees) {
+        try {
+            getITelephony().toggle2G(twoGees);
+        } catch (RemoteException e) {
+        }
+    }
+
+    /**
+     * @hide
+     */
+    public void toggleLTE(boolean lte) {
+        try {
+            getITelephony().toggleLTE(lte);
+        } catch (RemoteException e) {
+        }
     }
 
     /** Network type is unknown */

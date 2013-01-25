@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcelable;
 import android.os.SystemProperties;
+import android.provider.Settings;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
@@ -117,7 +118,10 @@ public class KeyguardViewManager {
     private boolean shouldEnableScreenRotation() {
         Resources res = mContext.getResources();
         return SystemProperties.getBoolean("lockscreen.rot_override",false)
-                || res.getBoolean(com.android.internal.R.bool.config_enableLockScreenRotation);
+                || Settings.System.getBoolean(
+                        mContext.getContentResolver(),
+                        Settings.System.LOCKSCREEN_AUTO_ROTATE,
+                        mContext.getResources().getBoolean(com.android.internal.R.bool.config_enableLockScreenRotation));
     }
 
     class ViewManagerHost extends FrameLayout {
